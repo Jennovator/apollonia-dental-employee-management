@@ -2,8 +2,8 @@ module.exports = mongoose => {
     const Employee = mongoose.model(
       'Employee',
       new mongoose.Schema({
-        name: String,
-        surname: String,
+        firstname: String,
+        lastname: String,
         department: String,
       })
     );

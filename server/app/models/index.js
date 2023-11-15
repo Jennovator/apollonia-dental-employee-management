@@ -1,11 +1,11 @@
-const dbConfig = require("../config/db.config.js");
-
-const mongoose = require("mongoose");
-mongoose.Promise = global.Promise;
+const mongoose = require('mongoose');
+const Employees = require('./employee.model');
+const Departments = require('./department.model');
 
 const db = {};
 db.mongoose = mongoose;
-db.url = dbConfig.url;
-db.apollonia = require("./employee.model.js")(mongoose);
+db.url = process.env.MONGODB_URI;
+db.employees = Employees(mongoose);
+db.departments = Departments(mongoose);
 
 module.exports = db;
