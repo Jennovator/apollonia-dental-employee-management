@@ -76,7 +76,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Employee.findByIdAndRemove(id)
+    Department.findByIdAndDelete(id)
         .then((department) => {
             res.send(department);
         })

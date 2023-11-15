@@ -63,17 +63,21 @@ exports.findByDepartment = (req, res) => {
 // Find Employee by ID
 exports.findOne = (req, res) => {
     const id = req.params.id;
-  
+    console.log('Requested ID:', id);
+
     Employee.findById(id)
-      .then((employee) => {
-        res.send(employee);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: "Error retrieving Employee with id=" + id,
+        .then(data => {
+            console.log('Retrieved Employee:', data);
+            if (!data)
+                res.status(404).send({ message: "Not found Employee with id " + id });
+            else res.send({message: "Employee retrieve with id" + id});
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).send({ message: "Error retrieving Employee with id=" + id });
         });
-      });
-  };
+};
+
 
 // Update Employee by ID
 exports.update = (req, res) => {
@@ -94,13 +98,21 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
   
-    Employee.findByIdAndRemove(id)
+    Employee.findByIdAndDelete(id)
       .then((employee) => {
-        res.send(employee);
+        if (!employee) {
+          res.status(404).send({
+            message: `Cannot delete employee with id=${id}. Id not found!`
+          });
+        } else {
+          res.send({
+            message: "Employee was deleted successfully!"
+          });
+        }
       })
-      .catch((err) => {
+      .catch(err => {
         res.status(500).send({
-          message: "Could not delete Employee with id=" + id,
+          message: "Could not delete employee with id=" + id
         });
       });
   };
