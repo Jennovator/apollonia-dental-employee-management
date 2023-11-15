@@ -104,3 +104,19 @@ exports.delete = (req, res) => {
         });
       });
   };
+
+  // Delete all Employees from the database.
+exports.deleteAll = (req, res) => {
+  Employee.deleteMany({})
+  .then(data => {
+    res.send({
+      message: `${data.deletedCount} Employees were deleted successfully!`
+    });
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while removing all tutorials."
+    });
+  });
+};
