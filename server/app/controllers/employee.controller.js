@@ -4,7 +4,7 @@ const Employee = db.employees;
 // Create and Save a new Employee
 exports.create = (req, res) => {
      // Validate request
-  if (!req.body.firstname || !req.body.lastname || !req.body.department) {
+  if (!req.body.firstname || !req.body.lastname) {
     res.status(400).send({ message: "Content can not be empty!" });
     return; 
   }
@@ -105,7 +105,7 @@ exports.delete = (req, res) => {
       });
   };
 
-  // Delete all Employees from the database.
+// Delete all Employees from the database.
 exports.deleteAll = (req, res) => {
   Employee.deleteMany({})
   .then(data => {
