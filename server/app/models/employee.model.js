@@ -17,7 +17,7 @@ module.exports = mongoose => {
     {
       firstname: String,
       lastname: String,
-      department: String,
+      department: String
     },
     { timestamps: true }
   );
