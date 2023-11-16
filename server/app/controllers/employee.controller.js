@@ -61,21 +61,36 @@ exports.findByDepartment = (req, res) => {
   };    
 
 // Find Employee by ID
-exports.findOne = (req, res) => {
-    const id = req.params.id;
-    console.log('Requested ID:', id);
+// exports.findOne = (req, res) => {
+//     const id = req.params.id;
+//     console.log('Requested ID:', id);
 
-    Employee.findById(id)
-        .then(data => {
-            console.log('Retrieved Employee:', data);
-            if (!data)
-                res.status(404).send({ message: "Not found Employee with id " + id });
-            else res.send({message: "Employee retrieve with id" + id});
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).send({ message: "Error retrieving Employee with id=" + id });
-        });
+//     Employee.findById(id)
+//         .then(data => {
+//             console.log('Retrieved Employee:', data);
+//             if (!data)
+//                 res.status(404).send({ message: "Not found Employee with id " + id });
+//             else res.send({message: "Employee retrieve with id" + id});
+//         })
+//         .catch(err => {
+//             console.error(err);
+//             res.status(500).send({ message: "Error retrieving Employee with id=" + id });
+//         });
+// };
+
+// Find Department by ID
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  Employee.findById(id)
+      .then((employee) => {
+          res.send(employee);
+      })
+      .catch((err) => {
+          res.status(500).send({
+              message: "Error retrieving employee with id=" + id,
+          });
+      });
 };
 
 
